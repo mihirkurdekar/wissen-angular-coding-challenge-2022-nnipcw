@@ -33,7 +33,6 @@ export class WelcomeComponent implements OnInit {
                     console.log(value['data']);
                     return value['data'];
                 }),
-                takeUntil(this.ngUnsubscribe)
             );
     }
 
