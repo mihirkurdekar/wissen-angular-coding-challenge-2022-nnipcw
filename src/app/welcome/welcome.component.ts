@@ -26,7 +26,7 @@ export class WelcomeComponent implements OnInit {
         // this.getUsers();
     }
 
-    private getUsers(): Observable<UserType[]> {
+    getUsers(): Observable<UserType[]> {
         return this.usersService.getUsers()
             .pipe(
                 map(value => {
