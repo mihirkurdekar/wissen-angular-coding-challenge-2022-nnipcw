@@ -1,7 +1,11 @@
 /**
  * Modify this file to fetch and display the login details
  */
-import { Component, OnInit } from "@angular/core";
+import {Component, OnInit} from "@angular/core";
+import {UserType} from "../types/user.type";
+import {Router} from "@angular/router";
+import {UsersService} from "../services/users.service";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: "app-welcome",
@@ -9,10 +13,14 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./welcome.component.css"]
 })
 export class WelcomeComponent implements OnInit {
-  user; // type this variable using user.type.ts file
-  constructor() {}
+  user: UserType = {}; // type this variable using user.type.ts file
+  constructor(private router: Router, private usersService:UsersService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.router.url);
+    this.user.username = this.router.url.split('/')[1];
+    this.usersService.getUsers().pipe(map(value => console.log(value)))
+  }
 
   ngOnDestroy() {}
 }
