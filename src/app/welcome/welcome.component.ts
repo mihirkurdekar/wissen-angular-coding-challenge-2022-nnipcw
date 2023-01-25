@@ -18,8 +18,8 @@ export class WelcomeComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.router.url);
-    this.user.username = this.router.url.split('/')[1];
-    this.usersService.getUsers().pipe(map(value => console.log(value)))
+    this.user.username = this.router.url.split('/')[2];
+    this.usersService.getUsers().pipe(map(value => console.log(value))).subscribe();
   }
 
   ngOnDestroy() {}

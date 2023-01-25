@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
                     localStorage.setItem('token', value.token);
                     this.router.navigateByUrl("welcome/"+this.loginForm.get('username').value);
                 }),
-            );
+            ).subscribe();
         }
     }
 
