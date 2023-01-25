@@ -7,7 +7,7 @@
         <div>
           <label>Username/Email</label>
           <input type="text" formControlName="username"/>
-          <div *ngIf="loginForm.controls['username'].invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched)" class="alert">
+          <div *ngIf="loginForm.controls['username'].invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched)" class="error-label">
             <div *ngIf="loginForm.controls['username'].errors.required">
               <label>
                 Username is required
@@ -18,7 +18,7 @@
         <div>
           <label>Password</label>
           <input type="password" formControlName="password"/>
-          <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)" class="alert">
+          <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)" class="error-label">
             <div *ngIf="loginForm.controls['password'].errors.required">
               <label>
                 Password is required
