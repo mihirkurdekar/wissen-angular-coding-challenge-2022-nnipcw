@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 /**
  * Modify the login component and the login template to collect login details and add the validators as necessary
  */
@@ -21,13 +21,24 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     // setup the loginform and validators
-    this.loginForm = this.formBuilder.group({});
+    this.loginForm = this.formBuilder.group({
+      username:['', Validators.required],
+      password:['', Validators.required]
+    });
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+
+  }
 
   onSubmit() {
-    // 
+    if(this.loginForm.valid){
+      this.authenticationService.login(
+          this.loginForm.get('username').value,
+          this.loginForm.get('password').value
+      ).subscribe(value => console.log(value), error => console.log(error))
+    }
+
   }
 
   // implement the username validator. Min 6 characters and no digits, special chars
