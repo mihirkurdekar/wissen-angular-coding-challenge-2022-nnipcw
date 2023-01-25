@@ -8,8 +8,8 @@ export class UsersService {
     constructor(private http: HttpClient) {
     }
 
-    getUsers(): Observable<UserType[]> {
-        return this.http.get<UserType[]>(
+    getUsers(): Observable<any> {
+        return this.http.get<any>(
             'https://reqres.in/api/unknown',
             {
                 headers: {

@@ -3,3 +3,21 @@
 
 Your login details: <br>
 <p>Username: {{user?.username}}</p>
+
+
+<div>
+    <h3>List of users</h3>
+    <table>
+        <thead>
+            <tr>
+                <td>id</td>
+                <td>name</td>
+                <td>year</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let pizza of getUsers() | async"></tr>
+
+        </tbody>
+    </table>
+</div>

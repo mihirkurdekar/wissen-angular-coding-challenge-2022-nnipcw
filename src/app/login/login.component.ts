@@ -5,8 +5,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
  * Modify the login component and the login template to collect login details and add the validators as necessary
  */
 import {AuthenticationService} from "../services/authentication.service";
-import {catchError, map} from "rxjs/operators";
-import {throwError} from "rxjs";
+import {catchError, map, takeUntil} from "rxjs/operators";
+import {Subject, throwError} from "rxjs";
 
 @Component({
     styleUrls: ["login.component.css"],
@@ -15,6 +15,7 @@ import {throwError} from "rxjs";
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     submitted = false;
+    private ngUnsubscribe = new Subject<void>();
 
     constructor(
         private formBuilder: FormBuilder,
@@ -32,7 +33,8 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnDestroy() {
-
+        this.ngUnsubscribe.next();
+        this.ngUnsubscribe.complete();
     }
 
     onSubmit() {
@@ -50,6 +52,7 @@ export class LoginComponent implements OnInit {
                     localStorage.setItem('token', value.token);
                     this.router.navigateByUrl("welcome/"+this.loginForm.get('username').value);
                 }),
+                takeUntil(this.ngUnsubscribe)
             ).subscribe();
         }
     }
