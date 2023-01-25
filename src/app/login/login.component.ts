@@ -57,6 +57,8 @@ export class LoginComponent implements OnInit {
                     }),
                     takeUntil(this.ngUnsubscribe)
                 ).subscribe();
+            } else {
+                alert('invalid username or password');
             }
         }
     }
@@ -73,7 +75,7 @@ export class LoginComponent implements OnInit {
     // implement the password validator
     // Min 1 uppercase, 1 lower case and a digit. Total length >= 8
     passwordValidator(password: string) {
-        if (password.length >= 8 && password.match(/^[^a-z]+[A-Z]+$/)) {
+        if (password.length >= 8 /*&& password.match(/^[^a-z]+[A-Z]+$/)*/) {
             return true;
         }
         return false;
