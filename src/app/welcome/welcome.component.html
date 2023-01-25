@@ -16,7 +16,11 @@ Your login details: <br>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let pizza of getUsers() | async"></tr>
+            <tr *ngFor="let user of users">
+                <td>user.id</td>
+                <td>user.name</td>
+                <td>user.year</td>
+            </tr>
 
         </tbody>
     </table>
