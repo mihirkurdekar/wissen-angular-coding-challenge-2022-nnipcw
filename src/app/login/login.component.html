@@ -1,0 +1,29 @@
+<div>
+  <div>
+    <h3>Hello there, Sign in to continue</h3>
+
+    <div>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div>
+          <label>Username/Email</label>
+          <input type="text" />
+          <div>
+            <!-- <label>
+              Username is required
+            </label> -->
+          </div>
+        </div>
+        <div>
+          <label>Password</label>
+          <input />
+          <div>
+            <!-- <label>
+              Password is required
+            </label> -->
+          </div>
+        </div>
+        <button>Login</button>
+      </form>
+    </div>
+  </div>
+</div>
