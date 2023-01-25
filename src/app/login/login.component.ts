@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthenticationService } from "../services/authentication.service";
 
 @Component({
+  styleUrls: ["login.component.css"],
   templateUrl: "login.component.html"
 })
 export class LoginComponent implements OnInit {
@@ -14,9 +15,9 @@ export class LoginComponent implements OnInit {
   submitted = false;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private router: Router,
-    private authenticationService: AuthenticationService
+      private formBuilder: FormBuilder,
+      private router: Router,
+      private authenticationService: AuthenticationService
   ) {}
 
   ngOnInit() {
