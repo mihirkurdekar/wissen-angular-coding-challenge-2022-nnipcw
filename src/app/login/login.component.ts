@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
         // setup the loginform and validators
         this.loginForm = this.formBuilder.group({
-            username: ['', Validators.required],
+            username: ['', Validators.required, this.usernameValidator],
             password: ['', Validators.required]
         });
     }
@@ -39,32 +39,43 @@ export class LoginComponent implements OnInit {
 
     onSubmit() {
         if (this.loginForm.valid) {
-            this.authenticationService.login(
-                this.loginForm.get('username').value,
-                this.loginForm.get('password').value
-            ).pipe(
-                catchError(err => {
-                    console.error(err);
-                    return throwError(err);
-                }),
-                map(value => {
-                    console.log(value);
-                    localStorage.setItem('token', value.token);
-                    this.router.navigateByUrl("welcome/"+this.loginForm.get('username').value);
-                }),
-                takeUntil(this.ngUnsubscribe)
-            ).subscribe();
+            let username = this.loginForm.get('username').value;
+            let password = this.loginForm.get('password').value;
+            if (this.usernameValidator(username), this.passwordValidator(password)) {
+                this.authenticationService.login(
+                    username,
+                    password
+                ).pipe(
+                    catchError(err => {
+                        console.error(err);
+                        return throwError(err);
+                    }),
+                    map(value => {
+                        console.log(value);
+                        localStorage.setItem('token', value.token);
+                        this.router.navigateByUrl("welcome/" + username);
+                    }),
+                    takeUntil(this.ngUnsubscribe)
+                ).subscribe();
+            }
         }
     }
 
     // implement the username validator. Min 6 characters and no digits, special chars
-    usernameValidator() {
+    usernameValidator(username: string) {
+        if (username.length >= 6 && username.match(/^[^a-zA-Z]+$/)) {
+            return true;
+        }
         return false;
+
     }
 
     // implement the password validator
     // Min 1 uppercase, 1 lower case and a digit. Total length >= 8
-    passwordValidator() {
+    passwordValidator(password: string) {
+        if (password.length >= 8 && password.match(/^[^a-z]+[A-Z]+$/)) {
+            return true;
+        }
         return false;
     }
 }
